@@ -3,6 +3,7 @@
 A tiny HTTP gateway that routes `.local` domains to local dev servers with [OrbStack](https://orbstack.dev/).
 
 `http://localhost:3000` -> `https://myproj.local`
+
 `http://localhost:8000` -> `https://api.myproj.local`
 
 ## How it works
