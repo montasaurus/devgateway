@@ -1,39 +1,39 @@
 # devgateway
 
-## Install
+A tiny HTTP gateway that routes `.local` domains to local dev servers with [OrbStack](https://orbstack.dev/).
 
-Setup your virtualenv and install all dependencies with:
+`http://localhost:3000` -> `https://myproj.local`
+`http://localhost:8000` -> `https://api.myproj.local`
 
-```bash
-just install
-```
+## How it works
 
-## Build
+- Set environment variables in the form `HOST__{name}={port}`.
+  - Requests for `{name}.{domain}` are proxied to the host machine on `{port}`.
+  - `HOST__default` is used as a fallback for the bare domain (and any unmatched
+    hosts).
+- Set the `dev.orbstack.domains` label to the `.local` domains you want to use (including a wildcard).
 
-To build all the projects in the repo:
+The container runs Caddy and generates its config at startup from the `HOST__*`
+variables.
 
-```bash
-just build
-```
+The container accepts connections on port 80.
 
-## Running Background Services
+## Example
 
-To run the necessary dependent services in background mode:
+Assume you have dev servers running that you want to reach via `myproj.local`:
 
-```bash
-just services-up
-```
+- `localhost:8000` (API)
+- `localhost:3000` (web)
 
-To stop them:
+### Docker Compose
 
-```bash
-just services-down
-```
-
-## Clean
-
-To remove all runtime data from `var`:
-
-```bash
-just clean
+```yaml
+services:
+  devgateway:
+    image: montasaurus/devgateway
+    labels:
+      - dev.orbstack.domains=*.myproj.local # wildcard for myproj.local and all subdomains
+    environment:
+      HOST__API: "8000" # send api.myproj.local to localhost:8000
+      HOST__default: "3000" # send myproj.local to localhost:3000
 ```

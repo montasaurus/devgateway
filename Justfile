@@ -2,7 +2,7 @@ install:
 	
 
 build:
-	
+	docker build -t montasaurus/devgateway:latest .
 
 services-up:
 	
