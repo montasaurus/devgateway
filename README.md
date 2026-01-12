@@ -6,6 +6,9 @@ A tiny HTTP gateway that routes `.local` domains to local dev servers with [OrbS
 
 `http://localhost:8000` -> `https://api.myproj.local`
 
+> [!IMPORTANT]
+> This is an alpha / experimental project.
+
 ## How it works
 
 - Set environment variables in the form `HOST__{name}={port}`.
@@ -38,3 +41,9 @@ services:
       HOST__API: "8000" # send api.myproj.local to localhost:8000
       HOST__default: "3000" # send myproj.local to localhost:3000
 ```
+
+## Sources
+
+Github: [montasaurus/devgateway](https://github.com/montasaurus/devgateway)
+
+Docker Image: [montasaurus/devgateway](https://hub.docker.com/r/montasaurus/devgateway)
