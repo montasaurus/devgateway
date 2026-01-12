@@ -6,10 +6,10 @@ A tiny HTTP gateway that routes `.local` domains to local dev servers with [OrbS
 
 `http://localhost:8000` -> `https://api.myproj.local`
 
+## How it works
+
 > [!IMPORTANT]
 > This is an alpha / experimental project.
-
-## How it works
 
 - Set environment variables in the form `HOST__{name}={port}`.
   - Requests for `{name}.{domain}` are proxied to the host machine on `{port}`.
